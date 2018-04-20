@@ -8,7 +8,7 @@ client.on('ready', () => {
 	client.user.setGame(`NoName Team | $help`,"http://twitch.tv/WeDontHaveChannel")
     client.user.setStatus("dnd")
 });
-let points = JSON.parse(fs.readFileSync('./typing/typePTS.json', 'utf8')); // يقوم بقراءه ملف النقاط , والمسار حق النقاط
+let points = JSON.parse(fs.readFileSync('./typePTS.json', 'utf8')); // يقوم بقراءه ملف النقاط , والمسار حق النقاط
 const prefix = "$"; // البرفكس العام لجميع الأوامر
 
 client.on('message', message => {
@@ -18,7 +18,7 @@ if (!points[message.author.id]) points[message.author.id] = { // يقوم الك
 if (message.content.startsWith(prefix + 'سرعة')) { // $سرعة
 	if(!message.channel.guild) return message.reply('**هذا الأمر للسيرفرات فقط**').then(m => m.delete(3000));
 
-const type = require('./typing/type.json'); // في هذا السطر يقوم الكود بقراءة ملف الأسئلة
+const type = require('./type.json'); // في هذا السطر يقوم الكود بقراءة ملف الأسئلة
 const item = type[Math.floor(Math.random() * type.length)]; // الأرراي المخصص للأسئلة
 const filter = response => { // في هذا السطر يقوم بصنع فلتر للأجوبة
     return item.answers.some(answer => answer.toLowerCase() === response.content.toLowerCase());
@@ -56,7 +56,7 @@ if (message.content.startsWith(prefix + 'نقاطي')) {
 	.setDescription(`نقاطك: \`${userData.points}\``)
 	message.channel.sendEmbed(embed)
 }
-  fs.writeFile("./typing/typePTS.json", JSON.stringify(points), (err) => {
+  fs.writeFile("./typePTS.json", JSON.stringify(points), (err) => {
     if (err) console.error(err)
   })
 });
