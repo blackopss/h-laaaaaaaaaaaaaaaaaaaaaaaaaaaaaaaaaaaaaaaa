@@ -84,7 +84,7 @@ if (message.content.startsWith(prefix + 'help')) {
 	\`TestaLagusa⁶⁹♆#2010\``)
 	message.channel.sendEmbed(embed).then(m => m.delete(10000));
 
-}
+
 });
 client.login(process.env.BOT_TOKEN);
 
