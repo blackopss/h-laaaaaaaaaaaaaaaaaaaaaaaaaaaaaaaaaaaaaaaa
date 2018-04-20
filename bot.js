@@ -40,9 +40,11 @@ message.channel.send('**لديك 15 ثانية لكتابة الكلمة**').the
           .catch(collected => { // في حال لم يقم أحد بالإجابة
             message.channel.send(`:x: **لم يقم أحد بكتابة الجملة بالوقت المناسب**`);
 			console.log(`[Typing] Error: No one type the word.`);
-       
+          })
+		})
+	})
+}
 });
-
 client.on('message', message => {
 if (message.content.startsWith(prefix + 'نقاطي')) {
 	if(!message.channel.guild) return message.reply('**هذا الأمر للسيرفرات فقط**').then(m => m.delete(3000));
@@ -53,16 +55,14 @@ if (message.content.startsWith(prefix + 'نقاطي')) {
 	.setFooter("بوت سرعة الكتابة", 'https://c.top4top.net/p_814rjkod1.png')
 	.setDescription(`نقاطك: \`${userData.points}\``)
 	message.channel.sendEmbed(embed)
-
+ 
   fs.writeFile("./typePTS.json", JSON.stringify(points), (err) => {
     if (err) console.error(err)
   })
 });
-
 client.on('guildCreate', guild => {
 	console.log(`Added to a server by: ${guild.owner.user.username} || Server name: ${guild.name} || Users: ${guild.memberCount}`); // ايفنت يقوم بإرسال إلى الكونسل بأنه قد قامت احد السيرفر بدعوة البوت
 });
-
 client.on('message', message => {
 if (message.content.startsWith(prefix + 'help')) {
 	if(!message.channel.guild) return message.reply('**هذا الأمر للسيرفرات فقط**').then(m => m.delete(3000));
@@ -76,6 +76,8 @@ if (message.content.startsWith(prefix + 'help')) {
 	
 	\`TestaLagusa⁶⁹♆#2010\``)
 	message.channel.sendEmbed(embed).then(m => m.delete(10000));
+
+
 });
 
 
