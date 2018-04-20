@@ -1,18 +1,3 @@
-// شكراً لشراءك كود سرعة الكتابة //
-
-// شروط الشراء:
-// 1- لديك الأحقية في تعديل الكود
-// 2- ليس لديك الحق بإعادة بيع الكود
-// 3- ليس لديك الحق بأن تقول إنك قمت بكتابة الكود كاملاً
-// الرجاء من قام بشراء الكود بأن يطبق الشروط
-
-// السيرفر الرسمي الخاص بالفريق:
-// https://discord.gg/VxatyBC //
-
-// CopyRight: NoName Team.
-
-// يمكنك رؤية التعديلات في هذا الأصدار نهاية السطر //
-
 const Discord = require("discord.js");
 const fs = require("fs")
 const client = new Discord.Client();
@@ -24,7 +9,9 @@ client.on('ready', () => {
     client.user.setStatus("dnd")
 });
 let points = JSON.parse(fs.readFileSync('./typePTS.json', 'utf8')); // يقوم بقراءه ملف النقاط , والمسار حق النقاط
+const prefix = "$"; // البرفكس العام لجميع الأوامر
 
+client.on('message', message => {
 if (!points[message.author.id]) points[message.author.id] = { // يقوم الكود تلقائياً في حال لم يجد نقاط العضو بإنشاء نقاط له ويتم إرسالها الملف المخصص
 	points: 0,
   };
@@ -53,8 +40,12 @@ message.channel.send('**لديك 15 ثانية لكتابة الكلمة**').the
           .catch(collected => { // في حال لم يقم أحد بالإجابة
             message.channel.send(`:x: **لم يقم أحد بكتابة الجملة بالوقت المناسب**`);
 			console.log(`[Typing] Error: No one type the word.`);
-		  }
-
+          })
+		})
+	})
+}
+});
+client.on('message', message => {
 if (message.content.startsWith(prefix + 'نقاطي')) {
 	if(!message.channel.guild) return message.reply('**هذا الأمر للسيرفرات فقط**').then(m => m.delete(3000));
 	let userData = points[message.author.id];
@@ -67,9 +58,11 @@ if (message.content.startsWith(prefix + 'نقاطي')) {
   }
   fs.writeFile("./typePTS.json", JSON.stringify(points), (err) => {
     if (err) console.error(err)
- 
- });
-
+  })
+});
+client.on('guildCreate', guild => {
+	console.log(`Added to a server by: ${guild.owner.user.username} || Server name: ${guild.name} || Users: ${guild.memberCount}`); // ايفنت يقوم بإرسال إلى الكونسل بأنه قد قامت احد السيرفر بدعوة البوت
+});
 client.on('message', message => {
 if (message.content.startsWith(prefix + 'help')) {
 	if(!message.channel.guild) return message.reply('**هذا الأمر للسيرفرات فقط**').then(m => m.delete(3000));
@@ -84,8 +77,12 @@ if (message.content.startsWith(prefix + 'help')) {
 	\`TestaLagusa⁶⁹♆#2010\``)
 	message.channel.sendEmbed(embed).then(m => m.delete(10000));
 
-
+}
 });
+
+
+
+
+
+
 client.login(process.env.BOT_TOKEN);
-
-
