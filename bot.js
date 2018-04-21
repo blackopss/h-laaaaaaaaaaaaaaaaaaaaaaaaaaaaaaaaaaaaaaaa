@@ -118,7 +118,7 @@ client.on('message', function(message) {
 			if (message.guild.voiceConnection) message.guild.voiceConnection.end();
 		});
 	}
-	else if (message.content.startsWith(prefix + 'volume')) {
+	else if (message.content.startsWith(prefix + 'vol')) {
 		if (!message.member.voiceChannel) return message.reply('**عفوا ,انت غير موجود في روم صوتي**');
 		// console.log(args)
 		if (args > 100) return message.reply(':x: **100**');
@@ -243,6 +243,22 @@ client.on('message', function(message) {
 
 
 
+client.on('message', message => {
+if (message.content.startsWith(prefix + 'help')) {
+	if(!message.channel.guild) return message.reply('**هذا الأمر للسيرفرات فقط**').then(m => m.delete(300));
+	let embed = new Discord.RichEmbed()
+    .setAuthor(`${message.author.tag}`, message.author.avatarURL)
+.setThumbnail("https://cdn2.iconfinder.com/data/icons/circle-icons-1/64/music-128.png")    
+ .addField("**:musical_note:  اوامر الميوزك**","** **")
+ .addField("**!play :musical_note: **","**لـ تشغيل لاغنيه**")
+ .addField("**!vol :musical_note:**","**لرفع صوت لاغنيه**")
+ .addField("**!stop :musical_note:**","**لـ اطفاء لاغنيه**")
+ .addField("**!skip :musical_note:**","**لـ نخطي لاغنيه**")
+ .setFooter("** ❇نبرى ذمتنا ❇: في أي أستعمال خاطئ للهذا الكوماند**")
+.setColor('RANDOM')
+	message.channel.sendEmbed(embed).then(m => m.delete(15000));
 
+}
+});
 
 client.login(process.env.BOT_TOKEN);
