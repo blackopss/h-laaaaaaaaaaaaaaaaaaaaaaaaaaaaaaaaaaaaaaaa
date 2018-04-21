@@ -7,11 +7,14 @@ const getYoutubeID = require('get-youtube-id');
 const fetchVideoInfo = require('youtube-info');
 
 const yt_api_key = "AIzaSyDeoIH0u1e72AtfpwSKKOSy3IPp2UHzqi4";
-const prefix = '.';
+const prefix = '!';
 const discord_token = "NDIyMDM3NzQwNTkxMzgyNTI4.DYV8zA.6vBJjF7Op9T_bH_YOwRMXqwh9vc";
-client.login(discord_token);
-client.on('ready', function() {
-	console.log(`i am ready ${client.user.username}`);
+client.on('ready', () => {
+    console.log(`Logged in as ${client.user.tag}!`);
+    console.log(`in ${client.guilds.size} servers `)
+    console.log(`[Users] ${client.users.size}`)
+	client.user.setGame(`!help |by ™¦༺♚ƙἶղց|MaS♚༺¦™ `)
+    client.user.setStatus("dnd")
 });
 
 
